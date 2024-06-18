@@ -1,15 +1,27 @@
-import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, { useContext } from "react";
 import "../../styles/home.css";
+import { Context } from "../store/appContext";
+import { Card } from '../component/Card.jsx'
+export const Home = () => {
+	const { store, actions } = useContext(Context);
+	return (
+		<div className="text-center mt-5 bg-dark">
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
-	</div>
-);
+
+			<div className="container">
+				<section className="d-flex overflow-auto mx-auto bg-dark" style={{ width: '90%' }}>
+
+					{store.swapi?.results?.map(el => <Card key={el.uid} name={el.name} uid={el.uid} type={'people'} />)}
+				</section>
+				<section className="d-flex overflow-auto mx-auto bg-dark my-5" style={{ width: '90%' }}>
+
+					{store.swapi?.results?.map(el => <Card key={el.uid} name={el.name} uid={el.uid} type={'planets'} />)}
+				</section>
+				<section className="d-flex overflow-auto mx-auto bg-dark my-5" style={{ width: '90%' }}>
+
+					{store.swapi?.results?.map(el => <Card key={el.uid} name={el.name} uid={el.uid} type={'vehicles'} />)}
+				</section>
+			</div>
+		</div>
+	);
+}
